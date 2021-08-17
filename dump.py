@@ -7,7 +7,7 @@ from multiprocessing import Process
 
 data_path = os.path.join("data", "result.csv")
 
-owm = OWM('05ddbbab284feea8ff74da8a292e9c36')
+owm = OWM('your_api_key')
 mgr = owm.weather_manager()
 observation = mgr.weather_at_place('Lowokwaru, ID')
 w = observation.weather
