@@ -4,6 +4,7 @@ import matplotlib.animation as animation
 from itertools import count
 from matplotlib import style
 
+
 data_path = os.path.join("data", "result.csv")
 
 style.use('fast')
@@ -42,4 +43,5 @@ def animate(i):
 
 fig.canvas.mpl_connect('button_press_event', onClick)
 ani = animation.FuncAnimation(fig, animate, interval=10)
+
 plt.show()
