@@ -1,9 +1,10 @@
-import os
 import csv
 import math
+import os
+from plot import show_plot
+from multiprocessing import Process
 from time import sleep
 from pyowm import OWM
-from multiprocessing import Process
 
 
 data_path = os.path.join("data", "result.csv")
@@ -15,41 +16,31 @@ observation = mgr.weather_at_place('Lowokwaru, ID')
 w = observation.weather
 
 
-def write_csv(data):
+def write_csv(result):
     with open(data_path, 'a') as outfile:
         writer = csv.writer(outfile)
-        writer.writerow(data)
-        
-        
-def run_plot():
-    import plot
-    
-    
-def start_plot_thread(p):
-    p.start()
-    
-    
-def join_plot_thread(p):
-    p.join()
-    
-    
-if __name__ == '__main__':
-    p = Process(target=run_plot)
-    
-    start_plot_thread(p)
-    
-    while(1):
+        writer.writerow(result)
+
+
+def dump_data():
+    while 1:
         temp = w.temperature('celsius')
-        [i for i in temp]
+        _ = [i for i in temp]
         new_temp = int(math.ceil(temp['temp']))
 
         print("temperature:", new_temp)
         print("humidity:", w.humidity)
-        
+
         data = (new_temp, w.humidity)
-        
+
         write_csv(data)
 
         sleep(1.1)
 
-    join_plot_thread(p)
+
+if __name__ == '__main__':
+    proc = Process(target=dump_data)
+
+    proc.start()
+    show_plot()
+    proc.join()

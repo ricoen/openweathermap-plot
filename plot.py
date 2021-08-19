@@ -15,13 +15,13 @@ fig.suptitle('Temperature and Humidity')
 pause = False
 
 
-def onClick(event):
+def on_click(_):
     global pause
     pause ^= True
 
 
-def animate(i):
-    graph_data = open(data_path,'r').read()
+def animate(_):
+    graph_data = open(data_path, 'r').read()
     lines = graph_data.split('\n')
     
     index = count()
@@ -50,6 +50,8 @@ def animate(i):
 
 ani = animation.FuncAnimation(fig, animate, interval=10)
 
-fig.canvas.mpl_connect('button_press_event', onClick)
+fig.canvas.mpl_connect('button_press_event', on_click)
 
-plt.show()
+
+def show_plot():
+    plt.show()
