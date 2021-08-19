@@ -14,22 +14,28 @@ mgr = owm.weather_manager()
 observation = mgr.weather_at_place('Lowokwaru, ID')
 w = observation.weather
 
+
 def write_csv(data):
     with open(data_path, 'a') as outfile:
         writer = csv.writer(outfile)
         writer.writerow(data)
         
+        
 def run_plot():
     import plot
+    
     
 def start_plot_thread(p):
     p.start()
     
+    
 def join_plot_thread(p):
     p.join()
     
+    
 if __name__ == '__main__':
     p = Process(target=run_plot)
+    
     start_plot_thread(p)
     
     while(1):
