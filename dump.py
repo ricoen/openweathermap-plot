@@ -41,10 +41,10 @@ def dump_data():
         
 
 if __name__ == '__main__':
-    proc1 = Process(target=dump_data)
+    run_dump_data = Process(target=dump_data)
 
-    proc1.start()
+    run_dump_data.start()
     
     plot.show_plot()
 
-    proc1.join()
+    run_dump_data.join()
