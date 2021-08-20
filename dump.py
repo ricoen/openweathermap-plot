@@ -1,6 +1,7 @@
 import csv
 import math
 import os
+import time
 import plot
 from multiprocessing import Process
 from time import sleep
@@ -24,6 +25,7 @@ def write_csv(result):
 
 def dump_data():
     while 1:
+        now = time.strftime('%H:%M:%S')
         temp = w.temperature('celsius')
         _ = [i for i in temp]
         new_temp = int(math.ceil(temp['temp']))
@@ -31,7 +33,7 @@ def dump_data():
         print("temperature:", new_temp)
         print("humidity:", w.humidity)
 
-        data = (new_temp, w.humidity)
+        data = (now, new_temp, w.humidity)
 
         write_csv(data)
 
