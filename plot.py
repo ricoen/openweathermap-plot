@@ -48,10 +48,13 @@ def animate(_):
         axs[1].set(xlabel='Detik Ke-n (s)', ylabel='Humidity (%)')
 
 
-ani = animation.FuncAnimation(fig, animate, interval=10)
-
-fig.canvas.mpl_connect('button_press_event', on_click)
-
-
 def show_plot():
+    _ = animation.FuncAnimation(fig, animate, interval=10)
+
+    fig.canvas.mpl_connect('button_press_event', on_click)
+    
     plt.show()
+
+
+if __name__ == '__main__':
+    show_plot()

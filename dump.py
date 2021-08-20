@@ -1,7 +1,7 @@
 import csv
 import math
 import os
-from plot import show_plot
+import plot
 from multiprocessing import Process
 from time import sleep
 from pyowm import OWM
@@ -36,11 +36,13 @@ def dump_data():
         write_csv(data)
 
         sleep(1.1)
-
+        
 
 if __name__ == '__main__':
-    proc = Process(target=dump_data)
+    proc1 = Process(target=dump_data)
 
-    proc.start()
-    show_plot()
-    proc.join()
+    proc1.start()
+    
+    plot.show_plot()
+
+    proc1.join()
