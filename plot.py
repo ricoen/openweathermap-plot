@@ -1,6 +1,7 @@
 import os
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import matplotlib.dates as mdates
 import datetime as dt
 from matplotlib import style
 
@@ -8,8 +9,11 @@ data_path = os.path.join("data", "result.csv")
 
 style.use('dark_background')
 
-fig, axs = plt.subplots(2, figsize=(10, 10))
+fig, axs = plt.subplots(2, figsize=(10, 10), sharex=True)
 fig.suptitle('Temperature and Humidity')
+
+locator = mdates.AutoDateLocator(minticks=12, maxticks=24)
+formatter = mdates.DateFormatter('%H:%M:%S')
 
 pause = False
 
@@ -19,7 +23,7 @@ def on_click(_):
     pause ^= True
 
 
-def animate(_):
+def animate(i):
     graph_data = open(data_path, 'r').read()
     lines = graph_data.split('\n')
     
@@ -37,18 +41,22 @@ def animate(_):
                 temperature.append(float(temp))
                 humidity.append(float(humid))
 
-        axs[0].clear()
-        axs[1].clear()
+        plt.cla()
         
         axs[0].plot(date, temperature, 'tab:red')
         axs[1].plot(date, humidity, 'tab:blue')
-        
-        axs[0].set(xlabel='Date', ylabel='Temperature (°C)')
-        axs[1].set(xlabel='Date', ylabel='Humidity (%)')
+    
+    axs[1].xaxis.set_major_locator(locator)
+    axs[1].xaxis.set_major_formatter(formatter)
+    
+    plt.xticks(rotation=40)
+
+    axs[0].set(ylabel='Temperature (°C)')
+    axs[1].set(xlabel='Date', ylabel='Humidity (%)')
 
 
 def show_plot():
-    _ = animation.FuncAnimation(fig, animate, interval=200)
+    ani = animation.FuncAnimation(fig, animate, interval=2000)
 
     fig.canvas.mpl_connect('button_press_event', on_click)
     

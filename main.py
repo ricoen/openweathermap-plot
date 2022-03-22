@@ -10,7 +10,7 @@ from pyowm import OWM
 
 data_path = os.path.join("data", "result.csv")
 
-owm = OWM('your_api_key')
+owm = OWM('df1c3f5c317429743ab4b25c5acb196d')
 mgr = owm.weather_manager()
 
 observation = mgr.weather_at_place('Lowokwaru, ID')
@@ -18,7 +18,7 @@ w = observation.weather
 
 
 def write_csv(result):
-    with open(data_path, 'a') as outfile:
+    with open(data_path, 'a', newline='') as outfile:
         writer = csv.writer(outfile)
         writer.writerow(result)
 
@@ -37,7 +37,7 @@ def dump_data():
 
         write_csv(data)
 
-        sleep(1.1)
+        sleep(1.98)
         
 
 if __name__ == '__main__':
