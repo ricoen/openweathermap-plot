@@ -10,7 +10,7 @@ from pyowm import OWM
 
 data_path = os.path.join("data", "result.csv")
 
-owm = OWM('df1c3f5c317429743ab4b25c5acb196d')
+owm = OWM('your_api_key')
 mgr = owm.weather_manager()
 
 observation = mgr.weather_at_place('Lowokwaru, ID')
