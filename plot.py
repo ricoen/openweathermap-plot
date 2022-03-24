@@ -12,7 +12,9 @@ style.use('dark_background')
 fig, axs = plt.subplots(2, figsize=(10, 10), sharex=True)
 fig.suptitle('Temperature and Humidity')
 
-locator = mdates.AutoDateLocator(minticks=12, maxticks=24)
+locator = mdates.AutoDateLocator(maxticks=10)
+locator.intervald[mdates.MINUTELY] = [1]
+
 formatter = mdates.DateFormatter('%H:%M:%S')
 
 pause = False
